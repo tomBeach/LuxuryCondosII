@@ -235,7 +235,24 @@ let myCondo = {
         myCondo.makeRoomsMenu();					// call the makeRoomsMenu() method from initialize()
         myCondo.makeCondoUnit();					// call the makeCondoUnit() method from initialize()
         myCondo.makeRoomDivs();						// call the makeRoomDivs() method from initialize()
+        myCondo.activateMenuItems();                // call the activateMenuItems() method from initialize()
     },
+
+    insertSelectedRoom: function() {
+        console.log("== insertSelectedRoom ==");
+    },
+
+    activateMenuItems: function() {
+        console.log("== activateMenuItems ==");
+
+        let menuItems = document.getElementsByClassName("menuItem");
+        console.log("menuItems:", menuItems);
+        for (let i = 0; i < menuItems.length; i++) {
+            console.log("menuItems[i]:", menuItems[i]);
+            document.addEventListener("click", myCondo.insertSelectedRoom);
+        };
+   },
+
     makeRoomsMenu: function() {
         console.log("== makeRoomsMenu ==");
         let menuItems = document.getElementsByClassName("menuItem");	// execute right side of "=" first
@@ -254,12 +271,13 @@ let myCondo = {
 		let condoUnit = document.createElement("div");
         console.log("condoUnit:", condoUnit);
 		condoBox.appendChild(condoUnit);
-		condoBox.children[1].setAttribute("id", "condoUnit");
-		condoBox.children[1].style.border = "2px solid purple";
-		condoBox.children[1].style.width = "320px";
-		condoBox.children[1].style.height = "180px";
-		condoBox.children[1].style.margin = "100px auto";
+		condoUnit.setAttribute("id", "condoUnit");
+		condoUnit.style.border = "2px solid purple";
+		condoUnit.style.width = "320px";
+		condoUnit.style.height = "180px";
+		condoUnit.style.margin = "100px auto";
     },
+
     makeRoomDivs: function() {
         console.log("== makeRoomDivs ==");
 		let condoUnit = document.getElementById("condoUnit");
@@ -268,16 +286,22 @@ let myCondo = {
 	        console.log("myCondo.rooms[i]:", myCondo.rooms[i]);
 			let nextRoomDiv = document.createElement("div")
 			condoUnit.appendChild(nextRoomDiv)
-			condoUnit.children[i].setAttribute("id", myCondo.rooms[i]);
-			condoUnit.children[i].style.border = "1px solid red";
-			condoUnit.children[i].style.width = "20px";
-			condoUnit.children[i].style.height = "20px";
-			condoUnit.children[i].style.margin = "0";
+			nextRoomDiv.setAttribute("id", myCondo.rooms[i]);
+			nextRoomDiv.style.border = "1px solid red";
+			nextRoomDiv.style.width = "20px";
+			nextRoomDiv.style.height = "20px";
+			nextRoomDiv.style.margin = "0";
         };
    }
 }
 myCondo.initialize();
-// myCondo.makeRoomsMenu();							// call (evoke) the makeRoomsMenu() method
+
+
+// ======= ======= ======= DEFAULT PROPERTIES ======= ======= =======
+// ======= ======= ======= DEFAULT PROPERTIES ======= ======= =======
+// ======= ======= ======= DEFAULT PROPERTIES ======= ======= =======
+
+
 
 
 // ======= ======= ======= DEFAULT PROPERTIES ======= ======= =======
@@ -324,83 +348,6 @@ myCondo.initialize();
 // ======= ======= ======= FUNCTIONS ======= ======= =======
 // ======= ======= ======= FUNCTIONS ======= ======= =======
 // ======= ======= ======= FUNCTIONS ======= ======= =======
-
-
-// ======= object method =======
-// let myCondo = {
-//     initialize: function(value) {
-//         console.log("== initialize ==");
-//         console.log("value: ", value);
-//     }
-// }
-// let myVariable = "objectMethod";
-// myCondo.initialize(myVariable);
-// console.log("myVariable: ", myVariable);
-// console.log("value: ", value);
-
-// ======= printThisValue =======               // class convention: comment function start
-// function printThisValue(nextVar) {
-//     console.log("== printThisValue ==");     // class convention: log function name
-//     console.log("nextVar:", nextVar);        // class convention: label/print arguments and variables
-// }
-//
-// let myVariable = "Joe";
-// printThisValue(myVariable);
-
-
-// ======= ======= ======= LOOPS ======= ======= =======
-// ======= ======= ======= LOOPS ======= ======= =======
-// ======= ======= ======= LOOPS ======= ======= =======
-
-
-// // ======= for loop =======
-// function forLoopFunction(array) {
-//     console.log("== forLoopFunction ==");
-//
-//     for (let index = 0; index < array.length; index++) {
-//         console.log("array[index]:", array[index]);
-//     }
-// }
-//
-// let loopArray = ["Joe", "Jon", "Jim", "Jill", "Jane"];
-// forLoopFunction(loopArray);
-
-// ======= each =======
-// function eachLoopFunction(object) {
-//     console.log("== eachLoopFunction ==");
-//
-//     // ======= jquery =======
-//     $.each(object, function(key, value) {
-//         console.log("key:", key, " value:", value);
-//     });
-//
-//     // ======= javascript =======
-//     for (let key in object) {
-//         if (object.hasOwnProperty(key)) {               // excludes "built-in" properties
-//             console.log("key/value:", key, object[key]);
-//         }
-//     }
-// }
-//
-// let loopObject = { name:"Tom", email:"teb@gmail.com", cat:"Sebastian" };
-// eachLoopFunction(loopObject);
-
-// // ======= while loop =======
-// function whileLoopFunction(loopLimit) {
-//     console.log("== whileLoopFunction ==");
-//     console.log("loopLimit: ", loopLimit);
-//     let x = 0;
-//     let counter = 0;
-//     while (x < loopLimit) {
-//         counter++;
-//         x = x + 2;
-//         console.log("counter/x: ", counter, x);
-//     }
-//     return x;
-// }
-// let loopX = whileLoopFunction(10);
-// console.log("loopX: ", loopX);
-
 
 
 
