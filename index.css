@@ -1,0 +1,123 @@
+
+/* ======= ======= ======= general ======= ======= ======= */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;        /* fluid height */
+    min-height: 100%;
+}
+body {
+    font-family: "Ariel", sans-serif;
+}
+* {
+    box-sizing: border-box;
+}
+p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+/* ======= ======= ======= containers ======= ======= ======= */
+#wrapper {
+    width: 80%;
+    min-width: 620px;
+    height: 100%;        /* fluid height */
+    margin: 1% auto;
+    padding: 0 1%;
+    border: solid 2px orange;
+}
+
+
+/* ======= ======= ======= layout ======= ======= ======= */
+header, footer {
+    width: 98%;
+    margin: 1%;
+    padding: 1%;
+    background-color: #eee;
+}
+header {
+    height: 18%;
+}
+aside {
+    float: left;
+    height: 66%;
+    width: 20%;
+    margin: 1%;
+    padding: 1%;
+    margin-bottom: 2%;
+    background-color: #ddd;
+}
+section, nav {
+    float: right;
+    width: 76%;
+    margin: 1%;
+    padding: 1%;
+}
+nav {
+    height: 8%;
+    background-color: coral;
+}
+section {
+    height: 56%;
+    margin-bottom: 2%;
+    background-color: thistle;
+}
+footer {
+    clear: both;
+    height: 10%;
+}
+
+/* ======= ======= ======= details ======= ======= ======= */
+#mainTitle {
+    width: 40%;
+    margin: 6% auto;
+    text-align: center;
+    color: black;
+}
+.subTitle {
+    margin: 2px;
+    text-align: center;
+}
+
+.menuItem {
+    float: left;
+    width: 18%;
+    height: 100%;
+    margin: 0 1%;
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 2.2em;
+    background-color: sandybrown;
+    color: purple;
+}
+.menuItem:hover {
+    background-color: purple;
+    color: white;
+}
+
+/* ======= ======= ======= condo ======= ======= ======= */
+#condoBox > p {
+    text-align: center;
+}
+.condoUnit {
+    width: 240px;
+    height: 120px;
+    border: 2px solid red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =======  ======= */
+
+
+
