@@ -100,11 +100,14 @@ footer {
     text-align: center;
 }
 .condoUnit {
+    position: relative;
     width: 240px;
     height: 120px;
     border: 2px solid red;
 }
-
+.condoUnit > div {
+    position: absolute;
+}
 
 
 

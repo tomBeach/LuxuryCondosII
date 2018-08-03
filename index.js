@@ -223,76 +223,158 @@
 // 	- example: console.log("menuItems[i]:", menuItems[i]);
 
 
-// ======= define the myCondo object =======
+// ======= define roomData object =======
+// let roomData = [
+//     { id:"livingRoom", name:"Living" },
+//     { id:"diningRoom", name:"Dining" },
+//     { id:"kitchen", name:"Kitchen" },
+//     { id:"bedroom", name:"Bedroom" },
+//     { id:"bathroom", name:"Bath" }
+// ]
+
+let roomData = [
+    { id:"livingRoom", name:"Living", X:0, Y:0, W:12, H:18 },
+    { id:"diningRoom", name:"Dining", X:12, Y:0, W:12, H:8 },
+    { id:"kitchen", name:"Kitchen", X:12, Y:8, W:8, H:10 },
+    { id:"bedroom", name:"Bedroom", X:20, Y:8, W:12, H:10 },
+    { id:"bathroom", name:"Bath", X:24, Y:0, W:8, H:8 }
+]
+
+
+
+// ======= define myCondo object =======
 let myCondo = {
     address: "1400 U St.",
     floor: "2",
     unit: "2-B",
-    rooms: ["livingRoom", "diningRoom", "kitchen", "bedroom", "bathroom"],
+    // rooms: ["livingRoom", "diningRoom", "kitchen", "bedroom", "bathroom"],
+    rooms: roomData,
     initialize: function() {
         console.log("== initialize ==");
         // debugger									// pause code execution to check process
         myCondo.makeRoomsMenu();					// call the makeRoomsMenu() method from initialize()
         myCondo.makeCondoUnit();					// call the makeCondoUnit() method from initialize()
         myCondo.makeRoomDivs();						// call the makeRoomDivs() method from initialize()
+        myCondo.labelRoomDivs();                    // call the labelRoomDivs() method from initialize()
+        myCondo.sizeRoomDivs();                     // call the sizeRoomDivs() method from initialize()
+        myCondo.locateRoomDivs();                   // call the locateRoomDivs() method from initialize()
         myCondo.activateMenuItems();                // call the activateMenuItems() method from initialize()
     },
 
-    insertSelectedRoom: function() {
-        console.log("== insertSelectedRoom ==");
-    },
-
-    activateMenuItems: function() {
-        console.log("== activateMenuItems ==");
-
+    makeRoomsMenu: function() {
+        console.log("== makeRoomsMenu ==");
         let menuItems = document.getElementsByClassName("menuItem");
         console.log("menuItems:", menuItems);
         for (let i = 0; i < menuItems.length; i++) {
-            console.log("menuItems[i]:", menuItems[i]);
-            document.addEventListener("click", myCondo.insertSelectedRoom);
-        };
-   },
-
-    makeRoomsMenu: function() {
-        console.log("== makeRoomsMenu ==");
-        let menuItems = document.getElementsByClassName("menuItem");	// execute right side of "=" first
-        console.log("menuItems:", menuItems);		// classroom convention: print variable name:value
-        for (let i = 0; i < menuItems.length; i++) {
-	        console.log("menuItems[i]:", menuItems[i]);
-	        menuItems[i].innerHTML = myCondo.rooms[i];
+            let nextMenuItem = menuItems[i];
+            let nextRoomData = myCondo.rooms[i];
+            let nextRoomId = nextRoomData.id;
+            let nextRoomName = nextRoomData.name;
+            nextMenuItem.innerHTML = nextRoomName;
+            nextMenuItem.setAttribute("id", "menu_" + nextRoomId);
         };
     },
 
-    // == students write this method independently
     makeCondoUnit: function() {
         console.log("== makeCondoUnit ==");
-		let condoBox = document.getElementById("condoBox");
-        console.log("condoBox:", condoBox);
-		let condoUnit = document.createElement("div");
-        console.log("condoUnit:", condoUnit);
-		condoBox.appendChild(condoUnit);
-		condoUnit.setAttribute("id", "condoUnit");
-		condoUnit.style.border = "2px solid purple";
-		condoUnit.style.width = "320px";
-		condoUnit.style.height = "180px";
-		condoUnit.style.margin = "100px auto";
+        let condoBox = document.getElementById("condoBox");
+        let condoUnit = document.createElement("div");
+        condoBox.appendChild(condoUnit);
+        condoUnit.setAttribute("id", "condoUnit");
+        condoUnit.style.border = "2px solid purple";
+        condoUnit.style.width = "320px";
+        condoUnit.style.height = "180px";
+        condoUnit.style.margin = "100px auto";
     },
 
     makeRoomDivs: function() {
         console.log("== makeRoomDivs ==");
-		let condoUnit = document.getElementById("condoUnit");
-        console.log("condoUnit:", condoUnit);
+        let condoUnit = document.getElementById("condoUnit");
         for (let i = 0; i < myCondo.rooms.length; i++) {
-	        console.log("myCondo.rooms[i]:", myCondo.rooms[i]);
-			let nextRoomDiv = document.createElement("div")
-			condoUnit.appendChild(nextRoomDiv)
-			nextRoomDiv.setAttribute("id", myCondo.rooms[i]);
-			nextRoomDiv.style.border = "1px solid red";
-			nextRoomDiv.style.width = "20px";
-			nextRoomDiv.style.height = "20px";
-			nextRoomDiv.style.margin = "0";
+            let nextRoomDiv = document.createElement("div")
+            condoUnit.appendChild(nextRoomDiv)
+            nextRoomDiv.setAttribute("id", myCondo.rooms[i].id);
+            nextRoomDiv.style.position = "absolute";
+            nextRoomDiv.style.border = "1px solid red";
+            nextRoomDiv.style.width = "20px";
+            nextRoomDiv.style.height = "20px";
+            nextRoomDiv.style.margin = "0";
         };
-   }
+    },
+
+    labelRoomDivs: function() {
+        console.log("== labelRoomDivs ==");
+        for (let i = 0; i < myCondo.rooms.length; i++) {
+            let nextRoomData = myCondo.rooms[i];
+            let nextRoomDiv = document.getElementById(nextRoomData.id);
+            nextRoomDiv.innerHTML = "<p>" + nextRoomData.name + "</p>";
+            nextRoomDiv.style.padding = "10px";
+        };
+    },
+
+    sizeRoomDivs: function() {
+        console.log("== sizeRoomDivs ==");
+        for (let i = 0; i < myCondo.rooms.length; i++) {
+            let nextRoomData = myCondo.rooms[i];
+            let nextRoomDiv = document.getElementById(nextRoomData.id);
+            let nextRoomWidth = nextRoomData.W * 10;
+            let nextRoomHeight = nextRoomData.H * 10;
+            nextRoomDiv.style.width = nextRoomWidth + "px";
+            nextRoomDiv.style.height = nextRoomHeight + "px";
+        };
+    },
+
+    locateRoomDivs: function() {
+        console.log("== locateRoomDivs ==");
+        let condoUnit = document.getElementById("condoUnit");
+        let condoUnitXYWH = condoUnit.getBoundingClientRect();
+        console.log("condoUnitXYWH:", condoUnitXYWH);
+        for (let i = 0; i < myCondo.rooms.length; i++) {
+            let nextRoomData = myCondo.rooms[i];
+            let nextRoomDiv = document.getElementById(nextRoomData.id);
+            let nextRoomX = (nextRoomData.X * 10) + condoUnitXYWH.left;
+            let nextRoomY = (nextRoomData.Y * 10) + condoUnitXYWH.top;
+            nextRoomDiv.style.left = nextRoomX + "px";
+            nextRoomDiv.style.top = nextRoomY + "px";
+        };
+    },
+
+    selectTargetRoom: function(targetRoom) {
+        console.log("== selectTargetRoom ==");
+        console.log("targetRoom:", targetRoom);
+        myCondo.clearAllRooms();
+        let targetRoomDiv = document.getElementById(targetRoom);
+        console.log("targetRoomDiv:", targetRoomDiv);
+        targetRoomDiv.style.background = "red";
+        targetRoomDiv.style.border = "4px solid purple";
+        targetRoomDiv.children[0].style.color = "white";
+    },
+
+    clearAllRooms: function() {
+        console.log("== clearAllRooms ==");
+        let condoRooms = document.getElementById("condoUnit").children;
+        for (let i = 0; i < condoRooms.length; i++) {
+            condoRooms[i].style.background = "";
+            condoRooms[i].style.border = "1px solid red";
+            condoRooms[i].children[0].style.color = "purple";
+        };
+    },
+
+    activateMenuItems: function() {
+        console.log("== activateMenuItems ==");
+        let menuItems = document.getElementsByClassName("menuItem");
+        for (let i = 0; i < menuItems.length; i++) {
+            let nextMenuItem = menuItems[i];
+            console.log("nextMenuItem:", nextMenuItem);
+            nextMenuItem.addEventListener('click', function(e){
+                console.log("e.target.id:", e.target.id);
+                let targetRoom = e.target.id.split("_")[1];
+                console.log("targetRoom:", targetRoom);
+                myCondo.selectTargetRoom(targetRoom);
+            })
+        };
+    }
+
 }
 myCondo.initialize();
 
@@ -301,12 +383,40 @@ myCondo.initialize();
 // ======= ======= ======= DEFAULT PROPERTIES ======= ======= =======
 // ======= ======= ======= DEFAULT PROPERTIES ======= ======= =======
 
+// == rooms array ==
+// rooms: ["livingRoom", "diningRoom", "kitchen", "bedroom", "bathroom"]
+
+// == room object ==
+// let livingRoom = { id:"livingRoom", name:"Living", W:12, H:18 }
+// let diningRoom = { id:"diningRoom", name:"Dining", W:12, H:18 }
+// let kitchen = { id:"kitchen", name:"Kitchen", W:12, H:18 }
+// let bedroom = { id:"bedroom", name:"Bedroom", W:12, H:18 }
+// let bathroom = { id:"bathroom", name:"Bath", W:12, H:18 }
+
+// let roomData = {
+//     livingRoom: { id:"livingRoom", name:"Living", W:12, H:18 },
+//     diningRoom: { id:"diningRoom", name:"Dining", W:12, H:18 },
+//     kitchen: { id:"kitchen", name:"Kitchen", W:12, H:18 },
+//     bedroom: { id:"bedroom", name:"Bedroom", W:12, H:18 },
+//     bathroom: { id:"bathroom", name:"Bath", W:12, H:18 }
+// }
+
+// let roomData = {
+//     livingRoom: { id:"livingRoom", name:"Living" },
+//     diningRoom: { id:"diningRoom", name:"Dining" },
+//     kitchen: { id:"kitchen", name:"Kitchen" },
+//     bedroom: { id:"bedroom", name:"Bedroom" },
+//     bathroom: { id:"bathroom", name:"Bath" }
+// }
+
 
 
 
 // ======= ======= ======= DEFAULT PROPERTIES ======= ======= =======
 // ======= ======= ======= DEFAULT PROPERTIES ======= ======= =======
 // ======= ======= ======= DEFAULT PROPERTIES ======= ======= =======
+
+
 
 
 // // == default property concepts
